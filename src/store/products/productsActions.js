@@ -1,10 +1,7 @@
-export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODCTS_SUCCESS'
+export const FETCH_PRODUCTS_REQUESTED = 'FETCH_PRODUCTS_REQUESTED'
+export const FETCH_PRODUCTS_ERROR = 'FETCH_PRODUCTS_ERROR'
+export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS'
 
-export const fetchProducts = () => async dispatch => {
-  const response = await fetch('/data/products.json')
-  const {data: {products: {items}}} = await response.json()
-  dispatch({
-    type: FETCH_PRODUCTS_SUCCESS,
-    payload: items
-  })
-}
+export const requestProducts = () => ({
+  type: FETCH_PRODUCTS_REQUESTED
+})
