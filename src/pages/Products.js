@@ -1,14 +1,16 @@
-import React, {useEffect, useState} from 'react'
-
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { StyledProducts } from '../styles/pages/Products.styles'
 import { Product } from '../components/Product'
+import { fetchProducts } from '../store/products'
 
 export const Products = () => {
-  const [products, setProducts] = useState([])
+  const products = useSelector(({products}) => products)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    fetch('/data/products.json').then(res => res.json()).then(({data: {products: {items}}}) => setProducts(items))
-  }, [])
+    dispatch(fetchProducts())
+  }, [dispatch])
 
   const renderProducts = () => products.map(product => <Product product={product} key={product.id} />)
 
