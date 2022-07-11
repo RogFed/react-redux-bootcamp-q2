@@ -1,7 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { StyledProducts } from '../styles/pages/Products.styles'
+import { Product } from '../components/Product'
+import { requestProducts } from '../store/products'
 
 export const Products = () => {
+  const products = useSelector(({products}) => products)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(requestProducts())
+  }, [dispatch])
+
+  const renderProducts = () => products.map(product => <Product product={product} key={product.id} />)
+
   return (
-    <div>Products</div>
+    <StyledProducts>
+      {!products && <div>Error loading products.</div>}
+      {products && products.length === 0 && <div>Loading...</div>}
+      {products && products.length > 0 && (renderProducts())}
+    </StyledProducts>
   )
 }
