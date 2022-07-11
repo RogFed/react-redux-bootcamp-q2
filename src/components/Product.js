@@ -17,7 +17,7 @@ export const Product = ({product}) => {
           <p>{categories[0]}</p>
         </StyledProductInformationGroup>
         <p>{price}</p>
-        <Button />
+        <Button>Add to cart</Button>
       </StyledProductInformation>
     </StyledProduct>
   )

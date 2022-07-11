@@ -4,8 +4,10 @@ const GlobalStyle = createGlobalStyle`
   :root {
     --main-text-size: 1.6rem;
     --product-heading-text-size: 2rem;
+    --main-heading-text-size: 3.2rem;
     --primary-blue-color: #2b2d42;
     --highlight-grey-color: #edf2f4;
+    --button-hover-color: #E4212D;
   }
 
   html {
