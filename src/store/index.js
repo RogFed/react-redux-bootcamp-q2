@@ -3,11 +3,13 @@ import { composeWithDevTools } from '@redux-devtools/extension'
 import createSagaMiddleware from 'redux-saga'
 import { productsReducer as products } from './products'
 import { userReducer as user } from './user'
+import { cartReducer as cart } from './cart'
 import { rootSaga } from './rootSaga'
 
 const rootReducer = combineReducers({
   products,
-  user
+  user,
+  cart
 })
 
 const sagaMiddleware = createSagaMiddleware()

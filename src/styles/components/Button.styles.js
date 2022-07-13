@@ -6,6 +6,7 @@ padding: 1.6rem;
 color: #fff;
 background: var(--primary-blue-color);
 border: none;
+cursor: pointer;
 
 &:hover {
   background: var(--button-hover-color);
