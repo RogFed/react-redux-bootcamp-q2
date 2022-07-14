@@ -12,11 +12,13 @@ export const Summary = ({cart}) => {
     return formatCurrency(total)
   }
 
+  const getTotalItems = () => cart.reduce((prevValue, currValue) => (prevValue) + (currValue.quantity), 0)
+
   return (
     <StyledSummary>
       <h2>Summary</h2>
       <hr />
-      <p>{`Items: ${cart.length ? cart.length : 0}`}</p>
+      <p>{`Items: ${getTotalItems()}`}</p>
       <hr />
       <p>Total Cost</p>
       <p>{getTotalCost()}</p>

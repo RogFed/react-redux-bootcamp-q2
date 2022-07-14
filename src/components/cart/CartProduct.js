@@ -17,10 +17,10 @@ export const CartProduct = ({item}) => {
 
   useEffect(() => {
     if(currentQuantity === quantity) return
-    
+
     const data = {
       id,
-      quantity: currentQuantity
+      quantity: parseInt(currentQuantity)
     };
 
     dispatch(updateQuantity(data))
