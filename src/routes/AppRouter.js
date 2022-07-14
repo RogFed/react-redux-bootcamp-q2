@@ -18,12 +18,10 @@ export const AppRouter = () => {
           <Home />
         </Route>
         <Route path='/products'>
-          {/* {user && user.id ? <Products /> : <Redirect to='/login' />} */}
-          <Products />
+          {user && user.id ? <Products /> : <Redirect to='/login' />}
         </Route>
         <Route path='/cart'>
-        {/* {user && user.id ? <Cart /> : <Redirect to='/login' />} */}
-        <Cart />
+        {user && user.id ? <Cart /> : <Redirect to='/login' />}
         </Route>
         <Route path='/login'>
           <Login />

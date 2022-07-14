@@ -1,38 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Summary } from '../components/cart/Summary'
 import { CartProduct } from '../components/cart/CartProduct'
-import styled from 'styled-components'
-
-const StyledCartContainer = styled.div`
-display: flex;
-flex-flow: row no-wrap;
-
-> :first-child {
-  flex-basis: 80%
-}
-
-table {
-  border-top: 1px solid;
-  padding-top: 20px
-}
-
-th {
-  font-size: 2rem;
-}
-
-td {
-  padding: 15px;
-}
-
-img {
-  max-width: 100%;
-}
-`
-
-const StyledCartSection = styled.section`
-width: 85%;
-margin: 0 auto;
-`;
+import { StyledCartContainer, StyledCartSection } from '../styles/pages/Cart.styles'
 
 export const Cart = () => {
   const cart = useSelector(({cart}) => cart)
@@ -60,7 +30,7 @@ export const Cart = () => {
             </tbody>
           </table>
         </div>
-        <div></div>
+        <Summary cart={cart} />
       </StyledCartContainer>
     </StyledCartSection>
   )

@@ -1,26 +1,35 @@
-import React from "react";
-import styled from "styled-components"
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux"
+import { updateQuantity, removeFromCart } from "../../store/cart";
 import { Button } from '../Button'
-
-const StyledQuantityCell = styled.div`
-input {
-  max-width: 100%;
-  margin-bottom: 10px;
-}
-`
-const StyledAlignRightCell = styled.div`
-text-align: right;
-`
-
-// TODO: Add styling to product grid. 
+import { useFormatCurrency } from "../../hooks";
+import { StyledQuantityCell, StyledAlignRightCell, StyledDetailsCell } from "../../styles/components/cart/CartProduct.styles";
 
 export const CartProduct = ({item}) => {
   const {images, name, quantity, price, id} = item
+  const dispatch = useDispatch()
+  const [currentQuantity, setCurrentQuantity] = useState(quantity)
+  const formatCurrency = useFormatCurrency();
+  
+  const handleQuantityUpdate = e => setCurrentQuantity(e.target.value)
+
+  const handleRemoveProduct = () => dispatch(removeFromCart(id))
+
+  useEffect(() => {
+    if(currentQuantity === quantity) return
+    
+    const data = {
+      id,
+      quantity: currentQuantity
+    };
+
+    dispatch(updateQuantity(data))
+  }, [currentQuantity, dispatch, quantity, id])
 
   return (
     <tr>
       <td>
-        <div>
+        <StyledDetailsCell>
           <div>
             <img src={images} alt={name} />
           </div>
@@ -28,22 +37,22 @@ export const CartProduct = ({item}) => {
             <p>{name}</p>
             <p>{`Product code: ${id}`}</p>
           </div>
-        </div>
+        </StyledDetailsCell>
       </td>
       <td>
         <StyledQuantityCell>
-          <input value={quantity}/>
-          <Button>Remove</Button>
+          <input value={currentQuantity} type="number" min="1" onChange={handleQuantityUpdate}/>
+          <Button clickHandler={handleRemoveProduct}>Remove</Button>
         </StyledQuantityCell>
       </td>
       <td>
         <StyledAlignRightCell>
-          <p>{`$${price}`}</p>
+          <p>{formatCurrency(price)}</p>
         </StyledAlignRightCell>
       </td>
       <td>
         <StyledAlignRightCell>
-          <p>{`$${price * quantity}`}</p>
+          <p>{formatCurrency(price * quantity)}</p>
         </StyledAlignRightCell>
       </td>
     </tr>
