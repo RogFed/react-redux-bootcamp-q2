@@ -1,2 +1,1 @@
-export * from './cartReducer'
-export * from './cartActions'
+export * from './cartSlice'

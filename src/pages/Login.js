@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { attemptLogin } from '../store/user'
 import { StyledLogin } from '../styles/pages/Login.styles'
 import { LoginInput } from '../components/login/Input'
@@ -22,14 +21,8 @@ export const Login = () => {
     username: '',
     password: ''
   })
+  
   const dispatch = useDispatch()
-  const user = useSelector(({user}) => user)
-  const history = useHistory()
-
-  useEffect(() => {
-    if (!user.id) return
-    history.push('/products')
-  }, [user, history])
 
   const renderInputBlocks = () => loginInputs.map(({inputId, placeholder}) => <LoginInput inputId={inputId} placeholder={placeholder} key={inputId} updateForm={updateForm} />)
 

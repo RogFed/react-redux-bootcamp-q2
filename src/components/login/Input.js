@@ -9,7 +9,6 @@ export const LoginInput = ({inputId, placeholder, updateForm}) => {
         updateForm(state => ({...state, username: e.target.value}))
         return
       case 'password':
-        // TODO: DO NOT SEND PASSWORD UNENCRYPTED
         updateForm(state => ({...state, password: e.target.value}))
         return
       default:
@@ -20,7 +19,7 @@ export const LoginInput = ({inputId, placeholder, updateForm}) => {
   return (
     <StyledInputBlock>
       <StyledLabel htmlFor={inputId}>{inputId}</StyledLabel>
-      <input id={inputId} placeholder={placeholder} onChange={handleInputChange} />
+      <input id={inputId} placeholder={placeholder} onChange={handleInputChange} type={inputId === 'password' ? 'password' : 'text'} />
     </StyledInputBlock>
   )
 }

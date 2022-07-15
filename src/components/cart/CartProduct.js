@@ -11,7 +11,10 @@ export const CartProduct = ({item}) => {
   const [currentQuantity, setCurrentQuantity] = useState(quantity)
   const formatCurrency = useFormatCurrency();
   
-  const handleQuantityUpdate = e => setCurrentQuantity(e.target.value)
+  const handleQuantityUpdate = e => {
+    if(e.target.value < 1) return
+    setCurrentQuantity(e.target.value)
+  }
 
   const handleRemoveProduct = () => dispatch(removeFromCart(id))
 

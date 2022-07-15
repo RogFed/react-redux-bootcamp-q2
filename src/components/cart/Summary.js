@@ -1,28 +1,27 @@
 import React from "react"
+import { useDispatch } from "react-redux"
+import { useHistory } from "react-router-dom"
 import { Button } from "../Button"
 import { useFormatCurrency } from "../../hooks"
+import { triggerPostOrder } from "../../store/cart"
 import { StyledSummary } from "../../styles/components/cart/Summary.styles"
 
-export const Summary = ({cart}) => {
+export const Summary = ({totalItems, totalCost}) => {
   const formatCurrency = useFormatCurrency()
-  
-  const getTotalCost = () => {
-    const total = cart.reduce((prevValue, currValue) => (prevValue) + (currValue.quantity * currValue.price), 0)
+  const dispatch = useDispatch()
+  const history = useHistory()
 
-    return formatCurrency(total)
-  }
-
-  const getTotalItems = () => cart.reduce((prevValue, currValue) => (prevValue) + (currValue.quantity), 0)
+  const handleCheckout = () => dispatch(triggerPostOrder(history))
 
   return (
     <StyledSummary>
       <h2>Summary</h2>
       <hr />
-      <p>{`Items: ${getTotalItems()}`}</p>
+      <p>{`Items: ${totalItems}`}</p>
       <hr />
       <p>Total Cost</p>
-      <p>{getTotalCost()}</p>
-      <Button>Checkout</Button>
+      <p>{formatCurrency(totalCost)}</p>
+      <Button isDisabled={totalItems === 0 ? true : false} clickHandler={handleCheckout}>Checkout</Button>
     </StyledSummary>
   )
 }

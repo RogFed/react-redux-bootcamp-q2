@@ -1,21 +1,14 @@
-import { legacy_createStore as createStore, combineReducers, applyMiddleware } from 'redux'
-import { composeWithDevTools } from '@redux-devtools/extension'
-import createSagaMiddleware from 'redux-saga'
-import { productsReducer as products } from './products'
-import { userReducer as user } from './user'
-import { cartReducer as cart } from './cart'
-import { rootSaga } from './rootSaga'
+import { configureStore } from "@reduxjs/toolkit";
+import { productsReducer } from "./products";
+import { cartReducer } from "./cart"
+import { userReducer } from "./user";
+import { ordersReducer } from './orders'
 
-const rootReducer = combineReducers({
-  products,
-  user,
-  cart
+export default configureStore({
+  reducer: {
+    products: productsReducer,
+    cart: cartReducer,
+    user: userReducer,
+    orders: ordersReducer
+  }
 })
-
-const sagaMiddleware = createSagaMiddleware()
-
-export const store = createStore(rootReducer, composeWithDevTools(
-  applyMiddleware(sagaMiddleware)
-))
-
-sagaMiddleware.run(rootSaga)

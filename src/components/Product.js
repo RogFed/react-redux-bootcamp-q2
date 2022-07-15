@@ -3,10 +3,12 @@ import { useDispatch } from "react-redux"
 import { StyledProduct, StyledFeaturedImage, StyledProductInformation, StyledProductInformationGroup } from "../styles/components/Product.styles"
 import { Button } from "./Button"
 import { addToCart } from "../store/cart"
+import { useFormatCurrency } from "../hooks"
 
 export const Product = ({product}) => {
   const {images, name, categories, price} = product 
   const dispatch = useDispatch()
+  const formatCurrency = useFormatCurrency()
 
   const onAddToCart = () => {
     dispatch(addToCart(product))
@@ -22,7 +24,7 @@ export const Product = ({product}) => {
           <h2>{name}</h2>
           <p>{categories[0]}</p>
         </StyledProductInformationGroup>
-        <p>{price}</p>
+        <p>{formatCurrency(price)}</p>
         <Button clickHandler={onAddToCart}>Add to cart</Button>
       </StyledProductInformation>
     </StyledProduct>
