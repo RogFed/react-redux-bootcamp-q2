@@ -8,7 +8,7 @@ import { SearchBar } from '../components/SearchBar'
 export const Products = () => {
   const allProducts = useSelector(selectAllProdcuts)
   const dispatch = useDispatch()
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState(undefined)
   const [products, setProducts] = useState(allProducts)
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export const Products = () => {
   }, [allProducts])
 
   useEffect(() => {
-    if (searchTerm === '') return
+    if (searchTerm === '') setProducts(allProducts)
 
     const filteredProducts = allProducts.filter(({name, description}) => name.toLowerCase().includes(searchTerm) || description.toLowerCase().includes(searchTerm))
 
