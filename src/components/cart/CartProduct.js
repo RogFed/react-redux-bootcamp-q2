@@ -19,7 +19,7 @@ export const CartProduct = ({item}) => {
   const handleRemoveProduct = () => dispatch(removeFromCart(id))
 
   useEffect(() => {
-    if(currentQuantity === quantity) return
+    if(parseInt(currentQuantity) === quantity) return
 
     const data = {
       id,
