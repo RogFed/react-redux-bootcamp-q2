@@ -20,7 +20,7 @@ export const Products = () => {
   }, [allProducts])
 
   useEffect(() => {
-    if (searchTerm === '') setProducts(allProducts)
+    if (!searchTerm) return;
 
     const filteredProducts = allProducts.filter(({name, description}) => name.toLowerCase().includes(searchTerm) || description.toLowerCase().includes(searchTerm))
 
