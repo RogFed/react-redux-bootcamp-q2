@@ -6,9 +6,11 @@ import {Cart} from '../pages/Cart';
 import {Home} from '../pages/Home';
 import {Header} from '../components/Header';
 import { Login } from '../pages/Login';
+import { Order } from '../pages/Order';
+import { selectUser } from '../store/user';
 
 export const AppRouter = () => {
-  const user = useSelector(({user}) => user)
+  const user = useSelector(selectUser)
 
   return (
     <Router>
@@ -21,10 +23,13 @@ export const AppRouter = () => {
           {user && user.id ? <Products /> : <Redirect to='/login' />}
         </Route>
         <Route path='/cart'>
-        {user && user.id ? <Cart /> : <Redirect to='/login' />}
+          {user && user.id ? <Cart /> : <Redirect to='/login' />}
+        </Route>
+        <Route path='/order'>
+          {user && user.id ? <Order /> : <Redirect to='/login' />}
         </Route>
         <Route path='/login'>
-          <Login />
+          {!user || !user.id ? <Login /> : <Redirect to='/products' />}
         </Route>
       </Switch>
     </Router>

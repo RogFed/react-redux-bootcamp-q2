@@ -14,7 +14,7 @@ export const Header = () => {
       <FlexContainer>
               <Links to="/cart">Cart</Links>
               <Links to="/products">Products</Links>
-            <Links to="/login">Login</Links>
+              <Links to="/login">Login</Links>
       </FlexContainer>
     </Bar>
   );
