@@ -1,8 +1,9 @@
 import { all, spawn, call } from 'redux-saga/effects'
 import { watchProductsSaga } from './products'
+import { watchUserSaga } from './user'
 
 export function* rootSaga () {
-  const sagas = [watchProductsSaga]
+  const sagas = [watchProductsSaga, watchUserSaga]
 
   yield all(sagas.map(saga =>
     spawn(function* () {

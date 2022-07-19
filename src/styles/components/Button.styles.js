@@ -6,10 +6,9 @@ padding: 1.6rem;
 color: #fff;
 background: var(--primary-blue-color);
 border: none;
+cursor: pointer;
 
 &:hover {
-  background: var(--highlight-grey-color);
-  color: var(--primary-blue-color);
-  font-weight: 700;
+  background: var(--button-hover-color);
 }
 `;

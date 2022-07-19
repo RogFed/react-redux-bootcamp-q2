@@ -1,5 +1,6 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import {Products} from '../pages/Products';
 import {Cart} from '../pages/Cart';
 import {Home} from '../pages/Home';
@@ -7,6 +8,8 @@ import {Header} from '../components/Header';
 import { Login } from '../pages/Login';
 
 export const AppRouter = () => {
+  const user = useSelector(({user}) => user)
+
   return (
     <Router>
       <Header />
@@ -15,10 +18,10 @@ export const AppRouter = () => {
           <Home />
         </Route>
         <Route path='/products'>
-          <Products />
+          {user && user.id ? <Products /> : <Redirect to='/login' />}
         </Route>
         <Route path='/cart'>
-          <Cart />
+        {user && user.id ? <Cart /> : <Redirect to='/login' />}
         </Route>
         <Route path='/login'>
           <Login />
